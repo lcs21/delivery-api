@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.delivery_api.Projeto.Delivery.API.entity.Cliente;
-import com.delivery_api.Projeto.Delivery.API.service.ClienteService;
+import com.delivery_api.Projeto.Delivery.API.services.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
