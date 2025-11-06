@@ -1,13 +1,14 @@
 package com.delivery_api.Projeto.Delivery.API.controller;
 import java.util.List;
 
-import com.delivery_api.Projeto.Delivery.API.enums.StatusPedido;
+import com.delivery_api.Projeto.Delivery.API.entity.PedidoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.delivery_api.Projeto.Delivery.API.entity.Pedido;
+import com.delivery_api.Projeto.Delivery.API.enums.StatusPedido;
 import com.delivery_api.Projeto.Delivery.API.services.PedidoService;
 
 @RestController
@@ -21,7 +22,7 @@ public class PedidoController {
      * Criar novo pedido
      */
     @PostMapping
-    public ResponseEntity<?> criarPedido(@RequestBody PedidoRequestDTO dto) {
+    public ResponseEntity<?> criarPedido(@RequestBody PedidoDTO dto) {
         try {
             Pedido pedido = pedidoService.criarPedido(dto);
             return ResponseEntity.ok(pedido);
@@ -33,11 +34,11 @@ public class PedidoController {
     /**
      * Listar pedido por cliente
      */
-    @PutMapping("/cliente/{clienteID}")
-    public ResponseEntity<List<Pedido>> listarPorCliente(@PathVariable Long clienteID) {
-        List<Pedido> pedidos = pedidoService.listarPorCLiente(clienteID);
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Pedido>> listarPorCliente(@PathVariable Long clienteId) {
+        List<Pedido> pedidos = pedidoService.listarPorCliente(clienteId);
         return ResponseEntity.ok(pedidos);
-        }
+    }
 
     /**
      * Atualizar status do pedido
