@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ValidationErrorResponse> handleBusinessException(EntityNotFoundException ex) {
+    public ResponseEntity<ValidationErrorResponse> handleBusinessException(BusinessException ex) {
         ValidationErrorResponse error = new ValidationErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 "Erro de regra de negócio",
@@ -62,6 +62,6 @@ public class GlobalExceptionHandler {
                 "Ocorreu um erro inesperado",
                 LocalDateTime.now()
         );
-        return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }

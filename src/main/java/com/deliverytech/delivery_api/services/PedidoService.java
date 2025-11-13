@@ -85,23 +85,21 @@ public class PedidoService {
         pedido.setStatus(status.name());
         return pedidoRepository.save(pedido);
     }
-
     // Pedidos por cliente
     public List<Pedido> buscarPedidosPorCliente(Long clienteId) {
         return pedidoRepository.findByClienteId(clienteId);
     }
-
-    // Listar por status
+    // listar por status
     public List<Pedido> listarPorStatus(StatusPedido status) {
         return pedidoRepository.findByStatus(status);
     }
-
-    // Listar os 10 mais recentes
+    // Listar os 10 pedidos mais recentes
     public List<Pedido> listarRecentes() {
         return pedidoRepository.findTop10ByOrderByDataPedidoDesc();
     }
-
-    // Listar pedidos por período
+    /**
+     * Listar pedidos por período
+     */
     public List<Pedido> listarPorPeriodo(LocalDateTime inicio, LocalDateTime fim) {
         return pedidoRepository.findByDataPedidoBetween(inicio, fim);
     }

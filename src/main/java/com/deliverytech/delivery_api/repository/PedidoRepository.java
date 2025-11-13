@@ -1,17 +1,17 @@
 package com.deliverytech.delivery_api.repository;
 
-import com.deliverytech.delivery_api.entity.Pedido;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import com.deliverytech.delivery_api.enums.StatusPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.deliverytech.delivery_api.entity.Pedido;
 
 @Repository
 public interface PedidoRepository extends JpaRepository <Pedido, Long> {
 
-    // Buscar pedidos por cliente ID
     List<Pedido> findByClienteIdOrderByDataPedidoDesc(Long clienteId);
 
     // Pedidos por cliente

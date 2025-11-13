@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table (name = "restaurantes")
+@Table(name = "restaurantes")
 public class Restaurante {
 
     @Id
@@ -34,7 +34,7 @@ public class Restaurante {
 
     private Boolean ativo;
 
-    private void inativar() {
+    public void inativar() {
         this.ativo = false;
     }
 }

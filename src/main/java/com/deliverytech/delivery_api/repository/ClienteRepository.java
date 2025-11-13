@@ -1,7 +1,7 @@
 package com.deliverytech.delivery_api.repository;
 
-import com.deliverytech.delivery_api.entity.Cliente;
 import org.springframework.stereotype.Repository;
+import com.deliverytech.delivery_api.entity.Cliente;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository <Cliente, Long> {
 
     // Buscar cliente por email (método derivado)
     Optional<Cliente> findByEmail(String email);
