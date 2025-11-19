@@ -14,26 +14,43 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Service
-@RequiredArgsConstructor
-public class UsuarioServiceImpl implements UsuarioService {
+//@RequiredArgsConstructor
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
+
+
     @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository,
+                              @Lazy PasswordEncoder passwordEncoder,
+                              @Lazy AuthenticationManager authenticationManager,
+                              JwtUtil jwtUtil) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+    }
 
     @Override
     public UsuarioResponseDTO cadastrar(UsuarioRequestDTO dto) {
@@ -69,5 +86,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return responseDTO;
 
+    }
+
+    // ... existing code ...
+
+    // Adicione este método para cumprir o contrato da interface UserDetailsService
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        // Ajuste o método "findByEmail" conforme o nome exato no seu UsuarioRepository
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
+
+        // Retorna o objeto User do Spring Security
+        return new org.springframework.security.core.userdetails.User(
+                usuario.getEmail(),
+                usuario.getSenha(),
+                new ArrayList<>() // Aqui você passaria as roles/authorities se tivesse
+        );
     }
 }
