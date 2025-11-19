@@ -1,7 +1,6 @@
 package com.deliverytech.delivery_api.entity;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "produtos")
+@Table(name = "produto")
 public class Produto {
 
     @Id
@@ -29,6 +28,12 @@ public class Produto {
 
     private Boolean disponivel;
 
-    private Long restauranteId;
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id")
+    private Restaurante restaurante;
+
+    public boolean isAtivo() {
+        return this.disponivel != null && this.disponivel;
+    }
 
 }

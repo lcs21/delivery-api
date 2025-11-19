@@ -3,6 +3,7 @@ package com.deliverytech.delivery_api.entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "restaurantes")
+@Table(name = "restaurante")
 public class Restaurante {
 
     @Id
@@ -25,6 +26,8 @@ public class Restaurante {
 
     private String endereco;
 
+    private String cep;
+
     private String telefone;
 
     @Column(name = "taxa_entrega")
@@ -34,7 +37,16 @@ public class Restaurante {
 
     private Boolean ativo;
 
-    public void inativar() {
-        this.ativo = false;
+    @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Produto> produtos;
+
+    @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Pedido> pedidos;
+
+    public boolean isAtivo() {
+        return this.ativo != null && this.ativo;
     }
+
 }

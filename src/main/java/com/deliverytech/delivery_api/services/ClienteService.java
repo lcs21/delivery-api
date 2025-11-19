@@ -1,10 +1,9 @@
 package com.deliverytech.delivery_api.services;
 
+import java.util.List;
 
 import com.deliverytech.delivery_api.dto.request.ClienteRequestDTO;
 import com.deliverytech.delivery_api.dto.response.ClienteResponseDTO;
-
-import java.util.List;
 
 public interface ClienteService {
 
@@ -12,13 +11,14 @@ public interface ClienteService {
 
     ClienteResponseDTO buscarPorId(Long id);
 
+    ClienteResponseDTO buscarPorEmail(String email);
+
     ClienteResponseDTO atualizar(Long id, ClienteRequestDTO dto);
 
-    ClienteResponseDTO ativarDesativar(Long id);
+    ClienteResponseDTO ativarDesativarCliente(Long id);
 
     List<ClienteResponseDTO> listarAtivos();
 
     List<ClienteResponseDTO> buscarPorNome(String nome);
-
 
 }

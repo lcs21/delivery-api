@@ -17,6 +17,9 @@ public interface RestauranteRepository extends JpaRepository <Restaurante, Long>
     // Buscar por nome
     Optional<Restaurante> findByNome(String nome);
 
+    //buscar por nome e ativo
+    Restaurante findByNomeAndAtivoTrue(String nome);
+
     // Buscar restaurantes ativos
     List<Restaurante> findByAtivoTrue();
 
@@ -38,4 +41,5 @@ public interface RestauranteRepository extends JpaRepository <Restaurante, Long>
             "GROUP BY r.id, r.nome")
     List<RelatorioVendas> relatorioVendasPorRestaurante();
 
+    List<Restaurante> findByTaxaEntregaBetween(BigDecimal precoMinimo, BigDecimal precoMaximo);
 }
