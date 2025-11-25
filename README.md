@@ -33,6 +33,6 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 - Profile: development
 
 ## 👨‍💻 Desenvolvedor
-Lucas Affonso - Arquitetura de sistemas API REST Full com Java Springboot
+Lucas Affonso | 12624210495 - Arquitetura de sistemas API REST Full com Java Springboot
 
 Desenvolvido com JDK 21 e Spring Boot 3.2.x

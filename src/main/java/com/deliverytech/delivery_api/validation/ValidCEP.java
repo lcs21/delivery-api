@@ -14,4 +14,5 @@ public @interface ValidCEP {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 }

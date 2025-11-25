@@ -1,7 +1,6 @@
 package com.deliverytech.delivery_api.validation;
 
 import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 
 public class TelefoneValidator implements ConstraintValidator<ValidTelefone, String> {
 
@@ -11,7 +10,8 @@ public class TelefoneValidator implements ConstraintValidator<ValidTelefone, Str
     }
 
     @Override
-    public boolean isValid(String telefone, ConstraintValidatorContext context) {
-        return telefone != null && !telefone.trim().isEmpty();
+    public boolean isValid(String telefone, jakarta.validation.ConstraintValidatorContext context) {
+        return telefone != null && telefone.matches("\\(\\d{2}\\) \\d{4,5}-\\d{4}");
     }
+
 }

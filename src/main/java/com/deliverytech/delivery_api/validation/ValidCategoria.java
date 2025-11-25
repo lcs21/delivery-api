@@ -9,9 +9,10 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidCategoria {
-    String message() default  "Categoria deve ser uma das opções válidas";
+    String message() default "Categoria deve ser uma das opções válidas";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 }
