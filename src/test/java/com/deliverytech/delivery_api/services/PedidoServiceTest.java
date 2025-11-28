@@ -130,7 +130,7 @@ class PedidoServiceTest {
     void deveAtualizarStatusDoPedido() {
         var pedido = new Pedido();
         pedido.setId(200L);
-        pedido.setStatus(StatusPedido.PENDENTE);
+        pedido.setStatus(StatusPedido.PENDENTE.name());
 
         when(pedidoRepository.findById(200L)).thenReturn(Optional.of(pedido));
         when(pedidoRepository.save(any(Pedido.class)))
