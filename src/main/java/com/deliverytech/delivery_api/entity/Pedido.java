@@ -27,8 +27,7 @@ public class Pedido {
     @Column(name = "data_pedido")
     private LocalDateTime dataPedido;
 
-    @Enumerated(EnumType.STRING)
-    private StatusPedido status;
+    private String status;
 
     @Column(name = "valor_total")
     private BigDecimal valorTotal;

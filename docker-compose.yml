@@ -1,0 +1,62 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lcs21/delivery-api:local
+    container_name: delivery-api
+    environment:
+      # Porta e perfis (se quiser usar profiles, opcional)
+      SERVER_PORT: "8080"
+      SPRING_PROFILES_ACTIVE: "default"
+
+      # --- Sobrescreve datasource para MySQL ---
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/delivery?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_JPA_SHOW_SQL: "true"
+
+      # --- Cache distribuído (Redis) ---
+      SPRING_CACHE_TYPE: "redis"
+      SPRING_DATA_REDIS_HOST: "redis"
+      SPRING_DATA_REDIS_PORT: "6379"
+      SPRING_CACHE_REDIS_TIME_TO_LIVE: "600000"
+
+      # JVM
+      JAVA_OPTS: "-XX:+UseZGC -Xms256m -Xmx512m"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - redis
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: delivery
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: [
+      "--default-authentication-plugin=mysql_native_password",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci"
+    ]
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--save", "20", "1", "--loglevel", "warning"]
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
