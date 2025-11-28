@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.deliverytech.delivery_api.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class Pedido {
     @Column(name = "data_pedido")
     private LocalDateTime dataPedido;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
     @Column(name = "valor_total")
     private BigDecimal valorTotal;

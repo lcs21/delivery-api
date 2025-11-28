@@ -1,26 +1,38 @@
 # Delivery Tech API
 
-Sistema de delivery desenvolvido com Spring Boot e Java 21.
+Sistema de delivery desenvolvido com **Spring Boot** e **Java 21**.
 
-## 🚀 Tecnologias
-- **Java 21 LTS** (versão mais recente)
+---
+
+## 🚀 Tecnologias Utilizadas
+- **Java 21 LTS**
 - Spring Boot 3.2.x
 - Spring Web
 - Spring Data JPA
-- H2 Database
+- Banco H2 (para testes)
 - Maven
+- JUnit 5 + Mockito (testes unitários)
+- Spring Boot Test + MockMvc (testes de integração)
+- Testcontainers (opcional para integração com Postgres)
+- JaCoCo (relatório de cobertura)
 
-## ⚡ Recursos Modernos Utilizados
+---
+
+## 🛠 Recursos Modernos
 - Records (Java 14+)
 - Text Blocks (Java 15+)
 - Pattern Matching (Java 17+)
 - Virtual Threads (Java 21)
 
-## 🏃‍♂️ Como executar
+---
+
+## ▶️ Como executar a aplicação
 1. **Pré-requisitos:** JDK 21 instalado
-2. Clone o repositório
-3. Execute: `./mvnw spring-boot:run`
-4. Acesse: http://localhost:8080/health
+2. Clone o repositório:
+   ```bash
+   git clone https://github.com/lcs21/delivery-api.git
+   cd delivery-api
+
 
 ## 📋 Endpoints
 - GET /health - Status da aplicação (inclui versão Java)
