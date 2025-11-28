@@ -39,6 +39,18 @@ Sistema de delivery desenvolvido com **Spring Boot** e **Java 21**.
 - GET /info - Informações da aplicação
 - GET /h2-console - Console do banco H2
 
+## 🧪 Testes
+- Comandos para rodar: ./mvnw test
+- Opção de relatórios (Surefire) e cobertura (JaCoCo) — com instrução de como habilitar
+- Exemplo de teste de integração com MockMvc (JUnit 5 + Spring Boot Test)
+
+## 🧭 Estratégia de Testes Adotada
+- Unitários (JUnit + Mockito)
+- Integração (Spring Boot Test + MockMvc, usando H2) [br-prod.as...rosoft.com]
+- Repositórios (Data JPA Test)
+- E2E (REST Assured – opcional)
+- Metas de cobertura (≥ 80% em domínio/serviços)
+
 ## 🔧 Configuração
 - Porta: 8080
 - Banco: H2 em memória
